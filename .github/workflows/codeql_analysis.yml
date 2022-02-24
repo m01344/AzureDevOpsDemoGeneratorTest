@@ -7,7 +7,7 @@ jobs:
   Build:
     # If you're only analyzing JavaScript or Python, CodeQL runs on ubuntu-latest, windows-latest, and macos-latest.
     # If you're analyzing C/C++, C#, Go, or Java, CodeQL runs on ubuntu-latest, windows-2019, and macos-latest.
-    runs-on: windows-2020
+    runs-on: windows
 
     steps:
       - name: Checkout repository
