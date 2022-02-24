@@ -28,21 +28,17 @@ jobs:
         with:
           languages: csharp
 
-      # Autobuild attempts to build any compiled languages (C/C++, C#, or Java).
-      # If this step fails, then you should remove it and run the build manually (see below).
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v1
+      - name: Setup MSBuild path
+        uses: microsoft/setup-msbuild@v1.0.2
 
-      # ℹ️ Command-line programs to run using the OS shell.
-      # 📚 https://git.io/JvXDl
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1.0.5
 
-      # ✏️ If the Autobuild fails above, remove it and uncomment the following
-      #    three lines and modify them (or add more) to build your code if your
-      #    project uses a compiled language
+      - name: Restore NuGet packages
+        run: nuget restore src/VSTSDemoGeneratorV2.sln
 
-      #- run: |
-      #     make bootstrap
-      #     make release
+      - name: Publish to folder
+        run: msbuild /nologo /verbosity:m /t:Build src/VSTSDemoGeneratorV2.sln
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
